@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: 'Mooctest-AIoT',
+  title: 'Cat Monitor',
 
   /**
    * @type {boolean} true | false

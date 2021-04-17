@@ -1,12 +1,6 @@
 <template>
   <div class="app-container">
-    <div v-if="appId === ''" style="margin-top: 28vh; text-align: center">
-      <img src="@/assets/not-bind-pic.png" alt="not-bind-pic"/>
-      <p class="prompt">您当前尚未绑定AppID, <el-button type="text">
-        <router-link to="/appId/bind">去绑定</router-link></el-button></p>
-    </div>
     <el-table
-      v-else
       v-loading="listLoading"
       :data="list"
       element-loading-text="Loading"
@@ -14,29 +8,14 @@
       fit
       highlight-current-row
     >
-      <el-table-column prop="qrcode" align="center" label="ID" width="150">
+      <el-table-column prop="id" label="设备id" align="center">
         <template slot-scope="scope">
-          {{ scope.row.qrcode }}
+          {{ scope.row.id || '——' }}
         </template>
       </el-table-column>
-      <el-table-column prop="park" label="园区" align="center" :filters="parkFilter" :filter-method="filterHandler">
+      <el-table-column prop="name" label="设备名称" align="center">
         <template slot-scope="scope">
-          {{ scope.row.park || '——' }}
-        </template>
-      </el-table-column>
-      <el-table-column prop="department" label="区域" align="center" :filters="departmentFilter" :filter-method="filterHandler">
-        <template slot-scope="scope">
-          <span>{{ scope.row.department || '——' }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column prop="room" label="房间" align="center">
-        <template slot-scope="scope">
-          <span>{{ scope.row.room || '——' }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column prop="number" label="编号" align="center">
-        <template slot-scope="scope">
-          <span>{{ scope.row.number || '——' }}</span>
+          {{ scope.row.name || '——' }}
         </template>
       </el-table-column>
       <el-table-column
@@ -47,17 +26,15 @@
         :filter-method="filterHandler"
         filter-placement="bottom-end">
         <template slot-scope="scope">
-          <el-tag
-            :type="scope.row.status | statusTypeFilter">{{ scope.row.status | statusTextFilter }}</el-tag>
+          <el-tag v-if="scope.row.status" type="success">已连接</el-tag>
+          <el-tag v-else type="info">未连接</el-tag>
         </template>
       </el-table-column>
       <el-table-column
         label="操作"
-        width="150"
         align="center">
         <template slot-scope="scope">
           <el-button
-            type="success"
             plain
             size="small"
             @click="toDetail(scope.row.qrcode)"
@@ -74,21 +51,19 @@ import { mapGetters } from 'vuex'
 import { statusTypeFilter, statusTextFilter } from '../../utils/filters'
 
 export default {
-  computed: {
-    ...mapGetters([
-      'appId'
-    ])
-  },
   filters: {
     statusTypeFilter,
     statusTextFilter
   },
   data() {
     return {
-      list: [],
+      list: [
+        {id: '0001', name: '智能猫砂盆', status: 1},
+        {id: '0002', name: '自动开门装置', status: 1},
+        {id: '0003', name: '智能猫碗', status: 1},
+        {id: '0003', name: '智能猫碗2', status: 0},
+      ],
       listLoading: true,
-      parkFilter: [],
-      departmentFilter: [],
       statusFilter: []
     }
   },
@@ -104,6 +79,8 @@ export default {
         this.departmentFilter = this.initFilter('department')
         this.statusFilter = this.initFilter('status', { ON: '在线', OFF: '离线' })
         this.listLoading = false
+      }).catch(err => {
+        this.listLoading = false;
       })
     },
     initFilter(colName, textValMap = null) {

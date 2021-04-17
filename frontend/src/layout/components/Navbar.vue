@@ -9,7 +9,7 @@
     <div class="right-menu">
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
-          <span class="welcome-text">欢迎来到MoocTest-AIoT</span>
+          <span class="welcome-text">欢迎来到猫咪智能监测系统</span>
           <img src="@/assets/avatar.png" class="user-avatar" alt="user-avartar">
           <i class="el-icon-caret-bottom" />
         </div>
