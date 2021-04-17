@@ -1,0 +1,106 @@
+@import './variables.scss';
+@import './mixin.scss';
+@import './transition.scss';
+@import './element-ui.scss';
+@import './sidebar.scss';
+
+body {
+  height: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
+}
+
+label {
+  font-weight: 700;
+}
+
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+#app {
+  height: 100%;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+a:focus,
+a:active {
+  outline: none;
+}
+
+a,
+a:focus,
+a:hover {
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+}
+
+div:focus {
+  outline: none;
+}
+
+.clearfix {
+  &:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+  }
+}
+
+// main-container global css
+.app-container {
+  padding: 20px;
+}
+
+// common css
+.green-point {
+  margin: 5px 10px 0 0;
+  width:8px;
+  height:8px;
+  background:rgba(36,206,110,1);
+  border-radius:50%;
+}
+
+.background-pic {
+  width: 100%;
+  height: 300px;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.title-container {
+  position: relative;
+
+  .title {
+    font-size: 26px;
+    color: #fff;
+    margin: 10% auto 40px auto;
+    text-align: center;
+    font-weight: bold;
+  }
+}
+
+.footer-text {
+  position: fixed;
+  bottom: 30px;
+  left: 43vw;
+  color: #999999;
+  font-size: 16px;
+}
+
+.prompt {
+  color: #5a5e66;
+}
